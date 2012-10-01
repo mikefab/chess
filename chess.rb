@@ -94,7 +94,7 @@ end
 
 class Square
   attr_reader :x, :y
-  attr_accessor :piece #pawn, knight biship..etc
+  attr_accessor :piece #pawn, knight bishop..etc
   def initialize(x, y)
     @x, @y = x, y
     case y  #line the b and g rows with pawns
@@ -130,7 +130,7 @@ class Square
     end
   end
 	
-  def Square.named(s) #for translating string coordinates to numbers. b3 -> 12
+  def self.named(s) #for translating string coordinates to numbers. b3 -> 12
     [s.downcase.ord - ?a.ord, s[1].ord - ?1.ord]
   end
 
@@ -141,7 +141,6 @@ class Square
   def self.get_squares_by_coordinates(start, stop, board)
     [start, stop].map{|coord| board.squares.select{|square| square.x == coord[1] and square.y == coord[0]}[0] }
   end
-
 end
 
 class Board
@@ -161,6 +160,5 @@ class Board
     end		
   end
 end
-
 
 Game.new.play

@@ -31,5 +31,4 @@ describe 'game' do
     start.piece.name.should == 'r' #should be a rook
     subject.occupiable?(start, stop, 'b').should == false
   end
-
 end
