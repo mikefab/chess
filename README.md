@@ -1,0 +1,1 @@
+This is a solution for a code test about chess. Two human players take turns moving pieces. Currently only pawns are movable. 
