@@ -2,7 +2,7 @@ class Game
   attr_accessor :board, :color_count
   def initialize
   @board = Board.new    
-  @color_count = 0
+  @color_count = 0  #for keeping track of which color's turn it is
   end
   def play
     loop do
