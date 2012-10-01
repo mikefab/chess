@@ -28,11 +28,7 @@ describe 'game' do
         
       end
     end
-    
-
   end
-
-
 
   it 'should only accept arguments in the appropriate format like "g2 e2"' do
     subject.valid?("g2 e2").should  == true
