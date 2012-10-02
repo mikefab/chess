@@ -15,9 +15,9 @@ class Game
         puts "You did not input the correct format: a3 b4, for instance\n"
         next
       end
-      start, stop = Square.convert_coordinates(input)
-      #get actual squares
-      start, stop = Square.get_squares_by_coordinates(start, stop, @board)
+      
+      start, stop = Square.get_squares(input, @board)
+
       turn(start, stop, color)                                    #input is valid, so move piece
     end
   end
@@ -132,6 +132,11 @@ class Square
 	
   def self.named(s) #for translating string coordinates to numbers. b3 -> 12
     [s.downcase.ord - ?a.ord, s[1].ord - ?1.ord]
+  end
+
+  def self.get_squares(input, board)
+    start, stop = convert_coordinates(input)
+    start, stop = get_squares_by_coordinates(start, stop, board)
   end
 
   def self.convert_coordinates(input)

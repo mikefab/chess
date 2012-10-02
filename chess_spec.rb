@@ -12,7 +12,7 @@ describe 'game' do
     subject.board.squares.size.should == 64
   end
 
-  it 'should have the right pieces in the right spots at the start of the game' do
+  it 'should have the right pieces, by type and color, in the right squares at the start of the game' do
     pieces = {
                 'r' => [[0, 0, 'b'], [0, 7, 'b'],[7, 0, 'w'], [7, 7, 'w']],
                 'b' => [[0, 1, 'b'], [0, 6, 'b'],[7, 1, 'w'], [7, 6, 'w']],
@@ -25,7 +25,6 @@ describe 'game' do
         square = subject.board.squares.select{|square| square.x == coord[1] and square.y == coord[0]}[0]
         square.piece.name.should == piece
         square.piece.color.should == coord[2]
-        
       end
     end
   end
@@ -37,16 +36,18 @@ describe 'game' do
   end
 
   it 'should allow movement of pawns' do
-    start, stop = Square.convert_coordinates("g2 e2") #g2 e2 are the coordinates for a square with a pawn
-    start, stop = Square.get_squares_by_coordinates(start, stop, subject.board)
+    start, stop = Square.get_squares("g2 e2", subject.board) #g2 e2 are the coordinates for a square with a pawn
     start.piece.name.should == 'P' #should be a pawn
     subject.occupiable?(start, stop, 'w').should == true
   end
 
   it 'should not allow movements of pieces that are not pawns' do
-    start, stop = Square.convert_coordinates("h1 f2")
-    start, stop = Square.get_squares_by_coordinates(start, stop, subject.board)
+    start, stop = Square.get_squares("h1 f2", subject.board)
     start.piece.name.should == 'r' #should be a rook
     subject.occupiable?(start, stop, 'b').should == false
+  end
+
+  it 'should only allow a pawn to move two spaces on its first turn' do
+    start, stop = Square.get_squares("g2 e2", subject.board) #g2 e2 are the coordinates for a square with a pawn
   end
 end
